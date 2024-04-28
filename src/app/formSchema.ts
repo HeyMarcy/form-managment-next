@@ -6,7 +6,7 @@ export const schema = z.object({
   }),
   file:
     typeof File !== "undefined"
-      ? z.instanceof(File, {
+      ? z.instanceof(FileList, {
           message: "Please enter a file",
         })
       : z.unknown(),

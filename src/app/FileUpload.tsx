@@ -30,7 +30,6 @@ const FileUpload = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       first: "",
-      file: undefined,
     },
   });
 
@@ -38,9 +37,10 @@ const FileUpload = () => {
   async function onSubmit(data: z.output<typeof schema>) {
     const formData = new FormData();
     formData.append("first", data.first);
-    if (data.file instanceof File || data.file instanceof Blob) {
+    if (data.file instanceof File) {
       formData.append("file", data.file);
     }
+
     onSubmitAction(formData);
     console.log(await onSubmitAction(formData));
   }
@@ -71,7 +71,7 @@ const FileUpload = () => {
                 )}
               />
               <FormField
-                // control={form.control}
+                control={form.control}
                 name='file'
                 render={({ field }) => (
                   <FormItem>
@@ -79,7 +79,7 @@ const FileUpload = () => {
                     <FormControl>
                       <Input
                         placeholder=''
-                        accept='.pdf, .docx'
+                        accept='.pdf, .ppt'
                         type='file'
                         {...field}
                       />
